@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FacturaeManager - Procesador Profesional de Facturas FacturaE XML | 25€</title>
+    <meta name="description" content="Software profesional para validar, firmar, modificar y organizar facturas electrónicas FacturaE XML. Cumplimiento normativa española AEAT. Licencia 25€.">
+    <meta name="keywords" content="facturae, facturación electrónica españa, validador facturae, firma digital facturas, AEAT, XML facturas, procesador facturas, contabilidad, autónomos, pymes">
+    <meta name="author" content="IsasiLab">
+    <meta property="og:title" content="FacturaeManager - Procesador Profesional de Facturas FacturaE">
+    <meta property="og:description" content="Valida, firma, modifica y organiza facturas XML FacturaE. Software offline para autónomos y empresas - 25€">
+    <meta property="og:url" content="https://isasilab.github.io/FacturaeManager-Landing/">
+    <meta property="og:type" content="website">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', Consolas, monospace;
+            line-height: 1.6;
+            color: #00ff00;
+            background: #000000;
+            overflow-x: hidden;
+        }
+        
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, #000 1px, transparent 1px),
+                linear-gradient(#000 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00;
+            font-weight: bold;
+            letter-spacing: 3px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00; }
+            to { text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00, 0 0 50px #00ff41; }
+        }
+        
+        .tagline {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            color: #00ff41;
+            font-weight: bold;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+        }
+        
+        .main-content {
+            background: rgba(0, 26, 0, 0.95);
+            border: 3px solid #00ff00;
+            border-radius: 0;
+            padding: 50px;
+            margin-top: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3), inset 0 0 20px rgba(0, 255, 0, 0.1);
+        }
+        
+        h2 {
+            color: #00ff41;
+            font-size: 2.2em;
+            margin: 40px 0 25px 0;
+            text-align: center;
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .feature {
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #00ff00;
+            border-radius: 0;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.5);
+            background: rgba(0, 51, 0, 0.8);
+        }
+        
+        .feature h3 {
+            color: #00ff41;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .feature p {
+            color: #00ff00;
+            font-size: 0.95em;
+        }
+        
+        .screenshots {
+            margin: 50px 0;
+        }
+        
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .screenshot {
+            border: 3px solid #00ff00;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .screenshot:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.6);
+        }
+        
+        .screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .screenshot-caption {
+            background: #000;
+            color: #00ff41;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            border-top: 2px solid #00ff00;
+        }
+        
+        .pricing {
+            background: rgba(0, 51, 0, 0.9);
+            border: 4px solid #00ff00;
+            padding: 60px;
+            border-radius: 0;
+            margin: 60px 0;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.4);
+            position: relative;
+        }
+        
+        .pricing::before {
+            content: '█';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            color: #00ff00;
+        }
+        
+        .pricing h2 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            color: #00ff00;
+        }
+        
+        .price {
+            font-size: 5em;
+            font-weight: bold;
+            color: #00ff41;
+            margin: 30px 0;
+            text-shadow: 0 0 20px #00ff00;
+        }
+        
+        .price-subtitle {
+            font-size: 1.2em;
+            color: #00ff00;
+            margin-bottom: 30px;
+        }
+        
+        .included {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #00ff00;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 700px;
+            text-align: left;
+        }
+        
+        .included h3 {
+            color: #00ff41;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+        
+        .included ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .included li {
+            padding: 10px 0;
+            color: #00ff00;
+            font-size: 1.1em;
+        }
+        
+        .included li:before {
+            content: '✔ ';
+            color: #00ff41;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 20px 50px;
+            background: #00ff00;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.4em;
+            border: 3px solid #00ff00;
+            transition: all 0.3s;
+            margin-top: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+        
+        .cta-button:hover {
+            background: #000;
+            color: #00ff00;
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.8), inset 0 0 20px rgba(0, 255, 0, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .tech-specs {
+            margin: 50px 0;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #00ff00;
+        }
+        
+        .tech-specs h3 {
+            color: #00ff41;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            text-align: left;
+        }
+        
+        .tech-specs ul {
+            list-style: none;
+            padding: 0;
+            columns: 2;
+            column-gap: 40px;
+        }
+        
+        .tech-specs li {
+            padding: 8px 0;
+            color: #00ff00;
+        }
+        
+        .tech-specs li:before {
+            content: '▸ ';
+            color: #00ff41;
+            margin-right: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            color: #00ff00;
+            border-top: 2px solid #00ff00;
+            margin-top: 60px;
+        }
+        
+        footer a {
+            color: #00ff41;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        footer a:hover {
+            text-shadow: 0 0 10px #00ff00;
+        }
+        
+        .contact {
+            margin: 50px 0;
+            padding: 40px;
+            background: rgba(0, 51, 0, 0.8);
+            border: 3px solid #00ff00;
+            text-align: center;
+        }
+        
+        .contact h2 {
+            margin-bottom: 30px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #00ff00;
+            min-width: 250px;
+        }
+        
+        .contact-item strong {
+            color: #00ff41;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .tech-specs ul {
+                columns: 1;
+            }
+            
+            .main-content {
+                padding: 30px 20px;
+            }
+            
+            .pricing {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    
+    <div class="container">
+        <header>
+            <h1><span class="emoji">🧾</span> FACTURAEM ANAGER</h1>
+            <p class="tagline">█ Procesador Profesional de Facturas FacturaE XML █</p>
+            <p style="font-size: 1.2em; color: #00ff00;">Valida • Firma • Modifica • Organiza</p>
+        </header>
+        
+        <div class="main-content">
+            <h2><span class="emoji">⚡</span> ¿Qué es FacturaeManager?</h2>
+            <p style="text-align: center; font-size: 1.2em; margin: 30px 0; color: #00ff41;">
+                <strong>Procesador avanzado para facturas electrónicas FacturaE en formato XML español.</strong><br>
+                NO crea facturas desde cero, sino que <strong>procesa facturas XML</strong> generadas por sistemas de facturación (A3, ContaPlus, etc.)
+            </p>
+            
+            <div class="features">
+                <div class="feature">
+                    <h3><span class="emoji">✅</span> Validador XSD</h3>
+                    <p>Validación contra esquemas oficiales AEAT FacturaE 3.2.2. Procesamiento batch de múltiples facturas.</p>
+                </div>
+                
+                <div class="feature">
+                    <h3><span class="emoji">✍️</span> Firmador Digital</h3>
+                    <p>Integración con AutoFirma. Firma con certificado electrónico (DNIe, FNMT). Firma batch.</p>
+                </div>
+                
+                <div class="feature">
+                    <h3><span class="emoji">🏛️</span> Módulo Andalucía</h3>
+                    <p>Modifica ReceiverContractReference, IssuerTransactionReference, DeliveryNoteNumber. Especial contratos públicos.</p>
+                </div>
+                
+                <div class="feature">
+                    <h3><span class="emoji">🔢</span> Procesador Decimales</h3>
+                    <p>Normalización FacturaE (6→2 decimales). Recálculo inteligente. Cumplimiento estándar AEAT.</p>
+                </div>
+                
+                <div class="feature">
+                    <h3><span class="emoji">📂</span> Organizador</h3>
+                    <p>Clasificación automática por fecha/cliente/estado. Renombrado inteligente. Estructura personalizable.</p>
+                </div>
+                
+                <div class="feature">
+                    <h3><span class="emoji">📝</span> Literales Legales</h3>
+                    <p>Gestión de textos legales personalizados. Plantillas reutilizables. Inserción automática en lotes.</p>
+                </div>
+                
+                <div class="feature">
+                    <h3><span class="emoji">📊</span> Dashboard</h3>
+                    <p>Estadísticas en tiempo real. Gráficos matplotlib. Exportación reportes Excel/PDF.</p>
+                </div>
+                
+                <div class="feature">
+                    <h3><span class="emoji">🛡️</span> Backup Automático</h3>
+                    <p>Copia de seguridad antes de cada modificación. Restauración fácil. Historial completo SQLite.</p>
+                </div>
+            </div>
+            
+            <div class="screenshots">
+                <h2><span class="emoji">📸</span> Capturas de Pantalla</h2>
+                <div class="screenshot-grid">
+                    <div class="screenshot">
+                        <img src="https://raw.githubusercontent.com/IsasiLab/FacturaeManager/main/assets/screenshots/FACTURAEMANAGER1.jpg" alt="Dashboard FacturaeManager">
+                        <div class="screenshot-caption">█ DASHBOARD - Estadísticas en Tiempo Real █</div>
+                    </div>
+                    <div class="screenshot">
+                        <img src="https://raw.githubusercontent.com/IsasiLab/FacturaeManager/main/assets/screenshots/FACTURAEMANAGER2.jpg" alt="Validador XSD">
+                        <div class="screenshot-caption">█ VALIDADOR XSD - Esquemas Oficiales AEAT █</div>
+                    </div>
+                    <div class="screenshot">
+                        <img src="https://raw.githubusercontent.com/IsasiLab/FacturaeManager/main/assets/screenshots/FACTURAEMANAGER3.jpg" alt="Interfaz Matrix">
+                        <div class="screenshot-caption">█ INTERFAZ MATRIX GUI - 8 Módulos █</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tech-specs">
+                <h3><span class="emoji">🛠️</span> Especificaciones Técnicas</h3>
+                <ul>
+                    <li><strong>Python 3.12+</strong> - Lenguaje principal</li>
+                    <li><strong>CustomTkinter 5.2+</strong> - GUI moderna</li>
+                    <li><strong>lxml 4.9+</strong> - Procesamiento XML</li>
+                    <li><strong>SQLite</strong> - Base de datos embebida</li>
+                    <li><strong>Matplotlib</strong> - Gráficos (opcional)</li>
+                    <li><strong>Windows 10/11</strong> - 64 bits</li>
+                    <li><strong>500 MB</strong> - Espacio en disco</li>
+                    <li><strong>Offline</strong> - Sin conexión requerida</li>
+                </ul>
+            </div>
+            
+            <div class="pricing">
+                <h2><span class="emoji">💰</span> PRECIO</h2>
+                <div class="price">25€</div>
+                <p class="price-subtitle">Licencia Individual • Pago Único • Sin Suscripciones</p>
+                
+                <div class="included">
+                    <h3>✔ Incluido en tu Licencia</h3>
+                    <ul>
+                        <li>Instalación automática (INSTALADOR.bat)</li>
+                        <li>Código fuente completo</li>
+                        <li>Actualizaciones v1.x gratis</li>
+                        <li>Soporte por email 3 meses</li>
+                        <li>Documentación completa</li>
+                        <li>Sin limitaciones de uso</li>
+                        <li>8 módulos profesionales</li>
+                        <li>Esquemas XSD oficiales AEAT</li>
+                    </ul>
+                </div>
+                
+                <a href="https://www.isasilab3d.com" class="cta-button">
+                    COMPRAR AHORA - 25€
+                </a>
+                
+                <p style="margin-top: 30px; color: #00ff00;">
+                    <strong>Ideal para:</strong> Autónomos, gestorías, empresas que procesan facturas XML FacturaE
+                </p>
+            </div>
+            
+            <div class="contact">
+                <h2><span class="emoji">📞</span> CONTACTO</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <strong>Email</strong>
+                        <a href="mailto:isasiapp2023@gmail.com">isasiapp2023@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Website</strong>
+                        <a href="https://www.isasilab3d.com" target="_blank">www.isasilab3d.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Instagram</strong>
+                        <a href="https://instagram.com/isasilab3d" target="_blank">@isasilab3d</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>GitHub</strong>
+                        <a href="https://github.com/IsasiLab" target="_blank">@IsasiLab</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>█ FacturaeManager v1.0.3 █</strong></p>
+            <p>Desarrollado por <a href="https://www.isasilab3d.com">Gabriel Isasi - IsasiLab</a></p>
+            <p style="margin-top: 20px; font-size: 0.9em;">
+                Compatible con facturas generadas por A3, ContaPlus, ContaSol, FacturaDirecta, Sage y cualquier sistema que exporte FacturaE XML oficial
+            </p>
+            <p style="margin-top: 30px; font-size: 0.8em; color: #00aa00;">
+                © 2026 IsasiLab. Todos los derechos reservados.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
