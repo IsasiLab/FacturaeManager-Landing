@@ -1,0 +1,690 @@
+<!-- ================================================= -->
+<!-- PÁGINA COMPLETA FACTURAEMANAGER PARA WORDPRESS -->
+<!-- Tema: Matrix Green (New Brutalism)              -->
+<!-- Autor: IsasiLab                                 -->
+<!-- Fecha: Febrero 2026                             -->
+<!-- ================================================= -->
+
+<style>
+.facturae-page {
+    font-family: 'Courier New', Consolas, monospace;
+    background: #000000;
+    color: #00ff00;
+    padding: 60px 20px;
+    margin: 0 auto;
+    max-width: 1400px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Fondo estilo Matrix */
+.facturae-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, transparent 0%, rgba(0, 255, 0, 0.03) 50%, transparent 100%),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 0, 0.05) 2px, rgba(0, 255, 0, 0.05) 4px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.facturae-header {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: glowIn 1.5s ease-out;
+}
+
+.facturae-header h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #00ff00;
+    margin-bottom: 20px;
+    text-shadow: 
+        0 0 10px #00ff00,
+        0 0 20px #00ff00,
+        0 0 40px #00ff41;
+    letter-spacing: 3px;
+}
+
+.facturae-header .subtitle {
+    font-size: 1.4rem;
+    color: #00ff41;
+    font-weight: 400;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.facturae-header .description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #00cc00;
+    max-width: 900px;
+    margin: 0 auto 40px;
+    border: 2px solid #00ff00;
+    padding: 30px;
+    background: rgba(0, 255, 0, 0.05);
+    border-radius: 0;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 0, 0.3),
+        inset 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.precio-matrix {
+    display: inline-block;
+    background: #000000;
+    border: 4px solid #00ff00;
+    color: #00ff00;
+    font-size: 2.5rem;
+    font-weight: 900;
+    padding: 25px 60px;
+    margin-top: 20px;
+    box-shadow: 
+        0 0 30px rgba(0, 255, 0, 0.6),
+        inset 0 0 20px rgba(0, 255, 0, 0.2);
+    animation: pulseBorder 2s infinite;
+    letter-spacing: 2px;
+}
+
+.precio-matrix .antes {
+    font-size: 1.2rem;
+    text-decoration: line-through;
+    opacity: 0.5;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Advertencia importante */
+.advertencia-box {
+    background: rgba(0, 255, 0, 0.1);
+    border: 3px dashed #00ff00;
+    padding: 30px;
+    margin: 40px auto;
+    max-width: 800px;
+    text-align: center;
+}
+
+.advertencia-box h3 {
+    color: #00ff00;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.advertencia-box p {
+    color: #00ff41;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Capturas */
+.capturas-matrix {
+    margin: 80px 0;
+}
+
+.capturas-matrix h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #00ff00;
+    text-align: center;
+    margin-bottom: 50px;
+    text-shadow: 0 0 20px #00ff00;
+    letter-spacing: 2px;
+}
+
+.captura-matrix {
+    background: #001100;
+    border: 3px solid #00ff00;
+    padding: 30px;
+    margin-bottom: 50px;
+    box-shadow: 
+        0 0 30px rgba(0, 255, 0, 0.4),
+        inset 0 0 20px rgba(0, 255, 0, 0.1);
+    transition: all 0.3s ease;
+    animation: slideInUp 1s ease-out;
+}
+
+.captura-matrix:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 0 50px rgba(0, 255, 0, 0.6),
+        inset 0 0 30px rgba(0, 255, 0, 0.2);
+}
+
+.captura-matrix img {
+    width: 100%;
+    height: auto;
+    border: 2px solid #00ff00;
+    margin-bottom: 25px;
+    filter: brightness(1.1) contrast(1.1);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.captura-matrix h3 {
+    font-size: 1.8rem;
+    color: #00ff00;
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.captura-matrix p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #00cc00;
+}
+
+/* Módulos grid */
+.modulos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin: 60px 0;
+}
+
+.modulo-card {
+    background: #001100;
+    border: 2px solid #00ff00;
+    padding: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.modulo-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #00ff00, #00ff41, #00ff00);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modulo-card:hover::before {
+    opacity: 0.3;
+}
+
+.modulo-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 40px rgba(0, 255, 0, 0.5);
+}
+
+.modulo-card h3 {
+    font-size: 1.5rem;
+    color: #00ff00;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.modulo-card .numero {
+    font-size: 3rem;
+    color: #00ff41;
+    font-weight: 900;
+    opacity: 0.3;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+.modulo-card p {
+    font-size: 1rem;
+    color: #00cc00;
+    line-height: 1.6;
+}
+
+/* Detalles técnicos */
+.detalles-section {
+    margin: 80px 0;
+}
+
+.detalles-section h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #00ff00;
+    text-align: center;
+    margin-bottom: 50px;
+    text-shadow: 0 0 20px #00ff00;
+}
+
+.detalle-lista {
+    background: transparent; 
+    border: 2px solid #00ff00;
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+}
+
+.detalle-item {
+    padding: 20px;
+    border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.detalle-item:last-child {
+    border-bottom: none;
+}
+
+.detalle-item:hover {
+    background: rgba(0, 255, 0, 0.1);
+    padding-left: 30px;
+}
+
+.detalle-item h4 {
+    color: #00ff00;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.detalle-item p {
+    color: #00cc00;
+    line-height: 1.6;
+}
+
+/* Specs técnicas */
+.specs-matrix {
+    background: #001100;
+    border: 3px solid #00ff00;
+    padding: 50px;
+    margin: 60px 0;
+    box-shadow: 0 0 40px rgba(0, 255, 0, 0.4);
+}
+
+.specs-matrix h2 {
+    font-size: 2.2rem;
+    color: #00ff00;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 0 0 15px #00ff00;
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.spec-matrix {
+    background: rgba(0, 255, 0, 0.05);
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    padding: 20px;
+}
+
+.spec-matrix strong {
+    color: #00ff41;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.spec-matrix span {
+    color: #00cc00;
+}
+
+/* CTA Matrix */
+.cta-matrix {
+    text-align: center;
+    margin: 80px 0;
+    padding: 60px 30px;
+    background: #000000;
+    border: 4px solid #00ff00;
+    box-shadow: 
+        0 0 50px rgba(0, 255, 0, 0.6),
+        inset 0 0 40px rgba(0, 255, 0, 0.1);
+}
+
+.cta-matrix h2 {
+    font-size: 2.8rem;
+    color: #00ff00;
+    margin-bottom: 20px;
+    font-weight: 900;
+    text-shadow: 0 0 20px #00ff00;
+    letter-spacing: 2px;
+}
+
+.cta-matrix p {
+    font-size: 1.3rem;
+    color: #00ff41;
+    margin-bottom: 40px;
+}
+
+.cta-button-matrix {
+    display: inline-block;
+    background: #00ff00;
+    color: #000000;
+    font-size: 1.5rem;
+    font-weight: 900;
+    padding: 20px 60px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 3px solid #00ff00;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+    letter-spacing: 1px;
+}
+
+.cta-button-matrix:hover {
+    background: #000000;
+    color: #00ff00;
+    transform: scale(1.1);
+    box-shadow: 0 0 50px rgba(0, 255, 0, 0.8);
+}
+
+/* Animaciones */
+@keyframes glowIn {
+    from {
+        opacity: 0;
+        text-shadow: 0 0 0 #00ff00;
+    }
+    to {
+        opacity: 1;
+        text-shadow: 0 0 20px #00ff00;
+    }
+}
+
+@keyframes pulseBorder {
+    0%, 100% {
+        box-shadow: 
+            0 0 30px rgba(0, 255, 0, 0.6),
+            inset 0 0 20px rgba(0, 255, 0, 0.2);
+    }
+    50% {
+        box-shadow: 
+            0 0 50px rgba(0, 255, 0, 0.8),
+            inset 0 0 30px rgba(0, 255, 0, 0.3);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .facturae-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .precio-matrix {
+        font-size: 2rem;
+        padding: 15px 40px;
+    }
+    
+    .modulos-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<div class="facturae-page">
+    
+    <!-- Header -->
+    <div class="facturae-header">
+        <h1>🧾 FACTURAEMANAGER</h1>
+        <p class="subtitle">[ PROCESADOR AVANZADO DE FACTURAS ELECTRÓNICAS XML ]</p>
+        <div class="description">
+            <strong>IMPORTANTE:</strong> FacturaeManager es un <strong>procesador</strong> de facturas FacturaE XML 
+            ya generadas por sistemas de facturación (A3, ContaPlus, Sage, etc.). 
+            <strong>NO crea facturas desde cero</strong>, sino que valida, firma, modifica y organiza 
+            archivos XML existentes cumpliendo normativa AEAT española.
+        </div>
+        <div class="precio-matrix">
+            <span class="antes">99€</span>
+            25€
+        </div>
+    </div>
+
+    <!-- Advertencia clara -->
+    <div class="advertencia-box">
+        <h3>⚠️ ¿QUÉ HACE ESTE SOFTWARE?</h3>
+        <p>
+            <strong>PROCESA facturas XML ya creadas.</strong><br>
+            Si buscas un software que cree facturas desde cero (datos maestros, clientes, productos), 
+            este NO es el programa indicado. FacturaeManager trabaja con archivos FacturaE XML 
+            generados previamente por tu sistema de facturación habitual.
+        </p>
+    </div>
+
+    <!-- 8 Módulos principales -->
+    <div class="detalles-section">
+        <h2>[ 8 MÓDULOS DE PROCESAMIENTO ]</h2>
+        
+        <div class="modulos-grid">
+            <div class="modulo-card">
+                <span class="numero">01</span>
+                <h3>📊 DASHBOARD</h3>
+                <p>Estadísticas completas: total facturas procesadas, firmadas, organizadas. Gráficos matplotlib con evolución mensual. Exportación Excel y PDF.</p>
+            </div>
+            
+            <div class="modulo-card">
+                <span class="numero">02</span>
+                <h3>✅ VALIDADOR XSD</h3>
+                <p>Validación oficial contra esquemas AEAT 3.2, 3.2.1 y 3.2.2. Detección de errores de estructura, campos obligatorios faltantes, tipos de datos incorrectos.</p>
+            </div>
+            
+            <div class="modulo-card">
+                <span class="numero">03</span>
+                <h3>🔐 FIRMADOR DIGITAL</h3>
+                <p>Firma electrónica con AutoFirma, DNIe o certificados FNMT. XMLDSig estándar. Compatible con sistemas de presentación telemática de AAPP.</p>
+            </div>
+            
+            <div class="modulo-card">
+                <span class="numero">04</span>
+                <h3>🏛️ MÓDULO ANDALUCÍA</h3>
+                <p>Modificación de ReceiverContractReference para contratos públicos Junta de Andalucía. Esencial para facturación electrónica con AAPP andaluzas.</p>
+            </div>
+            
+            <div class="modulo-card">
+                <span class="numero">05</span>
+                <h3>🔢 PROCESADOR DECIMALES</h3>
+                <p>Normalización 6→2 decimales según estándar FacturaE. Recalcula totales, subtotales, IVA e impuestos manteniendo cuadre contable. Evita rechazos por exceso de decimales.</p>
+            </div>
+            
+            <div class="modulo-card">
+                <span class="numero">06</span>
+                <h3>📁 ORGANIZADOR</h3>
+                <p>Clasificación automática por fecha, cliente, estado (emitida/validada/firmada). Sistema de carpetas inteligente. Backup automático pre-modificación.</p>
+            </div>
+            
+            <div class="modulo-card">
+                <span class="numero">07</span>
+                <h3>📝 LITERALES LEGALES</h3>
+                <p>Gestión de textos legales personalizables (cláusulas RGPD, condiciones de pago, avisos fiscales). Inserción automática en campo LegalLiterals del XML.</p>
+            </div>
+            
+            <div class="modulo-card">
+                <span class="numero">08</span>
+                <h3>📜 HISTORIAL</h3>
+                <p>Base de datos SQLite con trazabilidad completa. Registro de todas las operaciones: fecha, archivo, acción, usuario, resultado. Auditoría ISO 9001.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Capturas de pantalla -->
+    <div class="capturas-matrix">
+        <h2>[ CAPTURAS DEL SISTEMA ]</h2>
+        
+        <div class="captura-matrix">
+            <img src="https://raw.githubusercontent.com/IsasiLab/FacturaeManager/main/assets/screenshots/FACTURAEMANAGER1.jpg" alt="Dashboard FacturaeManager">
+            <h3>[ 01 ] DASHBOARD PRINCIPAL</h3>
+            <p>
+                Panel central estilo Matrix con estadísticas en tiempo real. Interfaz New Brutalism 
+                verde/negro con CustomTkinter. Vista de métricas clave: facturas procesadas hoy/mes/año, 
+                validaciones exitosas/fallidas, firmas realizadas, archivos organizados. Gráficos matplotlib 
+                integrados con evolución temporal. Sistema de notificaciones para alertas de validación.
+            </p>
+        </div>
+
+        <div class="captura-matrix">
+            <img src="https://raw.githubusercontent.com/IsasiLab/FacturaeManager/main/assets/screenshots/FACTURAEMANAGER2.jpg" alt="Validador XSD">
+            <h3>[ 02 ] VALIDADOR XSD OFICIAL</h3>
+            <p>
+                Motor de validación contra esquemas oficiales AEAT. Selección automática de versión 
+                FacturaE (3.2, 3.2.1, 3.2.2) según campo SchemaVersion del XML. Validación estricta: 
+                estructua, tipos de datos, campos obligatorios, rangos numéricos, formato fechas/NIFs. 
+                Informe detallado de errores con línea exacta y sugerencia de corrección. Modo batch 
+                para validar carpetas completas.
+            </p>
+        </div>
+
+        <div class="captura-matrix">
+            <img src="https://raw.githubusercontent.com/IsasiLab/FacturaeManager/main/assets/screenshots/FACTURAEMANAGER3.jpg" alt="Módulos de procesamiento">
+            <h3>[ 03 ] MÓDULOS DE PROCESAMIENTO</h3>
+            <p>
+                Vista de los 8 módulos especializados accesibles desde menú principal:
+                <br>• <strong>Firmador:</strong> Integración AutoFirma + certificados FNMT/DNIe
+                <br>• <strong>Andalucía:</strong> Modificación ReceiverContractReference para contratos públicos
+                <br>• <strong>Decimales:</strong> Normalización 6→2 con recalculo automático de totales
+                <br>• <strong>Organizador:</strong> Sistema de carpetas por fecha/cliente/estado
+                <br>• <strong>Literales:</strong> Gestión de cláusulas legales personalizables
+                <br>• <strong>Historial:</strong> Trazabilidad completa SQLite con auditoría ISO 9001
+            </p>
+        </div>
+    </div>
+
+    <!-- Detalles de uso -->
+    <div class="detalles-section">
+        <h2>[ CASOS DE USO TÍPICOS ]</h2>
+        
+        <div class="detalle-lista">
+            <div class="detalle-item">
+                <h4>✅ Validación Pre-Envío</h4>
+                <p>
+                    Validas facturas XML generadas por A3/ContaPlus antes de enviarlas al FACe/FACE. 
+                    Evitas rechazos por errores de estructura o campos obligatorios faltantes.
+                </p>
+            </div>
+            
+            <div class="detalle-item">
+                <h4>🔐 Firma Masiva</h4>
+                <p>
+                    Firmas 500 facturas de golpe con certificado FNMT antes de presentarlas a AAPP. 
+                    Firma XMLDSig estándar compatible con verificadores oficiales.
+                </p>
+            </div>
+            
+            <div class="detalle-item">
+                <h4>🏛️ Contratos Junta Andalucía</h4>
+                <p>
+                    Modificas ReceiverContractReference en lote para facturas de contratos públicos 
+                    andaluces. Campo obligatorio que muchos ERP no rellenan correctamente.
+                </p>
+            </div>
+            
+            <div class="detalle-item">
+                <h4>🔢 Normalización Decimales</h4>
+                <p>
+                    Tu ERP exporta con 6 decimales pero AEAT rechaza por exceso. Normalizas a 2 decimales 
+                    manteniendo cuadre contable perfecto (Base + IVA = Total).
+                </p>
+            </div>
+            
+            <div class="detalle-item">
+                <h4>📁 Organización Automática</h4>
+                <p>
+                    Tienes 10.000 XMLs en una carpeta caótica. Organizas automáticamente en estructura: 
+                    /2026/01_Enero/Cliente_A/factura_001.xml con backup pre-movimiento.
+                </p>
+            </div>
+            
+            <div class="detalle-item">
+                <h4>📜 Auditoría ISO</h4>
+                <p>
+                    Necesitas trazabilidad para ISO 9001. El historial SQLite registra cada operación: 
+                    quién, cuándo, qué archivo, qué acción, resultado. Exportable a Excel para auditorías.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Specs técnicas -->
+    <div class="specs-matrix">
+        <h2>[ ESPECIFICACIONES TÉCNICAS ]</h2>
+        
+        <div class="specs-grid">
+            <div class="spec-matrix">
+                <strong>SISTEMA:</strong>
+                <span>Windows 10/11 (64 bits)</span>
+            </div>
+            
+            <div class="spec-matrix">
+                <strong>REQUISITOS:</strong>
+                <span>RAM 4GB, CPU Intel i3/Ryzen 3 o superior</span>
+            </div>
+            
+            <div class="spec-matrix">
+                <strong>LENGUAJE:</strong>
+                <span>Python 3.12+</span>
+            </div>
+            
+            <div class="spec-matrix">
+                <strong>XML ENGINE:</strong>
+                <span>lxml 4.9+ (procesamiento industrial)</span>
+            </div>
+            
+            <div class="spec-matrix">
+                <strong>BASE DATOS:</strong>
+                <span>SQLite 3.x (historial/auditoría)</span>
+            </div>
+            
+            <div class="spec-matrix">
+                <strong>GUI:</strong>
+                <span>CustomTkinter 5.2+ (tema Matrix)</span>
+            </div>
+            
+            <div class="spec-matrix">
+                <strong>ESQUEMAS:</strong>
+                <span>AEAT FacturaE 3.2 / 3.2.1 / 3.2.2</span>
+            </div>
+            
+            <div class="spec-matrix">
+                <strong>FIRMA:</strong>
+                <span>AutoFirma + FNMT/DNIe compatible</span>
+            </div>
+            
+            <div class="spec-matrix">
+                <strong>ESPACIO:</strong>
+                <span>100 MB (instalación completa)</span>
+            </div>
+            
+            <div class="spec-matrix">
+                <strong>LICENCIA:</strong>
+                <span>MIT - Uso comercial permitido</span>
+            </div>
+            
+            <div class="spec-matrix">
+                <strong>SOPORTE:</strong>
+                <span>3 meses email incluido</span>
+            </div>
+            
+            <div class="spec-matrix">
+                <strong>ACTUALIZACIONES:</strong>
+                <span>Acceso GitHub vitalicio</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Final -->
+    <div class="cta-matrix">
+        <h2>[ OPTIMIZA TU FACTURACIÓN XML ]</h2>
+        <p>ACCESO GITHUB + INSTALADOR + 3 MESES SOPORTE</p>
+        <a href="mailto:isasiapp2023@gmail.com?subject=Compra%20FacturaeManager%2025€&body=Hola,%0A%0AQuiero%20comprar%20la%20licencia%20de%20FacturaeManager%20por%2025€.%0A%0ANombre:%0AEmail:%0AEmpresa%20(opcional):%0A%0AGracias." class="cta-button-matrix">
+            💳 COMPRAR POR 25€
+        </a>
+    </div>
+
+</div>
